@@ -1,0 +1,45 @@
+/* --- Refined Custom CSS for Home Banner Glow Effect --- */
+
+//Light/Dark mode switch | reference: common/theme.styl
+
+// compile-time variable definition
+// 亮色主题下的光晕/阴影值
+$light-banner-title-glow-core = 0 0 10px rgb(0, 187, 255)
+$light-banner-title-glow-env = 0 0 25px rgb(0, 195, 255)
+$light-banner-title-glow = $light-banner-title-glow-core, $light-banner-title-glow-env
+$light-banner-subtitle-glow = 0 0 5px rgb(0, 68, 255)
+
+// 暗色主题下的光晕/阴影值
+$dark-banner-title-glow-core = 0 0 10px rgb(255, 255, 255) //核心光晕
+$dark-banner-title-glow-env = 0 0 25px rgb(255, 0, 0)   //环境光散
+$dark-banner-title-glow = $dark-banner-title-glow-core, $dark-banner-title-glow-env
+$dark-banner-subtitle-glow = 0 0 5px rgb(145, 90, 90)
+
+
+// change logic
+// 默认应用亮色主题的变量
+:root
+  --banner-title-glow: $light-banner-title-glow
+  --banner-subtitle-glow: $light-banner-subtitle-glow
+
+// 亮色模式下的覆盖值
+.light-mode
+  --banner-title-glow: $light-banner-title-glow
+  --banner-subtitle-glow: $light-banner-subtitle-glow
+
+// 暗色模式下的覆盖值
+.dark-mode
+  --banner-title-glow: $dark-banner-title-glow
+  --banner-subtitle-glow: $dark-banner-subtitle-glow
+
+
+//use
+.home-banner-container .description {
+  text-shadow: var(--banner-title-glow);
+}
+
+.home-banner-container #subtitle {
+  text-shadow: var(--banner-subtitle-glow);
+}
+
+/* ------------------------------------------------------------- */

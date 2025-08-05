@@ -24,3 +24,7 @@
 
 if (hexo-config('home.sidebar.enable') == true)
   @require 'layout/home-sidebar.styl'
+
+
+// 自定义样式的引入，在最后，期望覆盖掉之前的配置
+@require 'common/_custom.styl'
