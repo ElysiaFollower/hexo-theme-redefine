@@ -27,9 +27,9 @@ export function initMasonry() {
     }
   }
 
-  if (loadedCount === images.length) {
-    initializeMasonryLayout();
-  }
+  // if (loadedCount === images.length) {
+  //   initializeMasonryLayout();
+  // }
   function initializeMasonryLayout() {
     loadingPlaceholder.style.opacity = 0;
     setTimeout(() => {
