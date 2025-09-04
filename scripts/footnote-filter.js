@@ -20,7 +20,7 @@ const FootnotesRenderer = (text) => {
 
   const footnotes = [];// records of all footnotes we find
   // use RegExp to find our target
-  const reFootnoteContent = /\[\^(\d+)\]:\s*([\S\s]+?)(?=\[\^(?:\d+)\]|\n\n|$)/g; // 在遇到下一个[^2]或双换行或$的时候停止匹配 ;pattern example: [^1]: This is the first footnote.
+  const reFootnoteContent = /\[\^(\d+)\]:\s*([\S\s]+?)(?=\[\^(?:\d+)\]|\n\n|$|<\/p>|<br>)/g; // 在遇到下一个[^2]或双换行或$或</p>或<br>的时候停止匹配 ;pattern example: [^1]: This is the first footnote.
   const reInlineFootnote = /\[\^(\d+)\]\((.+?)\)/g; //pattern example: [^1](https://example.com)
   const reFootnoteIndex = /\[\^(\d+)\]/g; // pattern example: [^1]
 
@@ -90,7 +90,7 @@ const FootnotesRenderer = (text) => {
 
 
 // use 'before_post_render' hook, ensure it process a markdown text rather than a html text
-hexo.extend.filter.register('before_post_render', (data) => {
+hexo.extend.filter.register('after_post_render', (data) => {
   if (data.layout === 'post' || data.layout === 'page') {
     data.content = FootnotesRenderer(data.content);
   }
