@@ -11,7 +11,7 @@
  */
 
 const imageSize = require('image-size');
-const fetch = require('node-fetch'); // TODO: Migrate to native fetch when Node.js v16 support is dropped.
+//const fetch = require('node-fetch'); // TODO: Migrate to native fetch when Node.js v16 support is dropped.
 const fs = require('fs');
 const path = require('path');
 
@@ -75,7 +75,8 @@ hexo.extend.generator.register('masonry_dimensions', async function() {
         if (!response.ok) {
           throw new Error(`Masonry: HTTP error! status: ${response.status}`);
         }
-        const imageBuffer = await response.buffer();
+        const arrayBuffer = await response.arrayBuffer();
+        const imageBuffer = Buffer.from(arrayBuffer);
         // 使用 image-size 库从 Buffer 中解析尺寸
         dimensions = imageSize.imageSize(imageBuffer);
         hexo.log.info(`Masonry:  -> Fetched: ${image.image} [${dimensions.width}x${dimensions.height}]`);//允许用户看到图片的fetch情况，方便把握进度
