@@ -10,8 +10,7 @@
  * - In development mode (`hexo server`/`s`): Reads from the file cache but does not write to it, preventing build loops.
  */
 
-const imageSize = require('image-size');
-//const fetch = require('node-fetch'); // TODO: Migrate to native fetch when Node.js v16 support is dropped.
+const imageSize = require('../source/js/tools/imageSize');
 const fs = require('fs');
 const path = require('path');
 
@@ -83,7 +82,7 @@ hexo.extend.generator.register('masonry_dimensions', async function() {
       }
       else{
         //本地文件直接进行读取
-        //TODO: local path must be relative to source_dir currently
+        //local path must be relative to source_dir currently
         const imagePath = path.join(hexo.source_dir, image.image);
         if (!fs.existsSync(imagePath)) {
           throw new Error(`Local image not found at: ${imagePath}`);
@@ -110,7 +109,7 @@ hexo.extend.generator.register('masonry_dimensions', async function() {
   const canonicalName = aliasMap[userInputCmd] || userInputCmd;
   const isServerMode = canonicalName === 'server';
   if (isServerMode) {
-    // 开发模式下，不更新缓存—— 否则文件缓存的更新会被检测到，导致不断触发网页重建
+    // 开发模式下，不更新文件缓存—— 否则文件缓存的更新会被检测到，导致不断触发网页重建
     hexo.log.debug(`Masonry: hexo server mode detected. File cache not updated.`);
   } else {
     // 生产模式下，更新文件缓存
